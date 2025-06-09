@@ -27,7 +27,8 @@ const Experience: React.FC = () => {
             'Applied statistical and ML techniques for robust anomaly detection'
           ]
         }
-      ]
+      ],
+      certificateLink: 'https://drive.google.com/file/d/1aZ415VL1naKpwM_Mb7FBwO67be-fZAbJ/view?usp=sharing'
     }
   ];
 
@@ -53,7 +54,7 @@ const Experience: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
             Experience
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto" />
         </div>
 
         {/* Main Experience */}
@@ -73,7 +74,7 @@ const Experience: React.FC = () => {
                     <p className="text-blue-300 text-lg font-semibold">{exp.position}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex flex-col space-y-2">
                   <div className="flex items-center text-gray-300">
                     <Calendar size={16} className="mr-2" />
@@ -101,6 +102,20 @@ const Experience: React.FC = () => {
                   </div>
                 ))}
               </div>
+
+              {/* Certificate Link */}
+              {exp.certificateLink && (
+                <div className="mt-6">
+                  <a
+                    href={exp.certificateLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition"
+                  >
+                    View Internship Certificate
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>

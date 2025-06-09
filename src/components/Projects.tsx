@@ -7,16 +7,16 @@ const Projects: React.FC = () => {
       title: 'Inventory Management Dashboard',
       description: 'Developed a scalable and interactive dashboard with Next.js, Tailwind CSS, Node.js, Prisma ORM, and AWS for efficient inventory tracking and management.',
       technologies: ['Next.js', 'Tailwind CSS', 'Node.js', 'Prisma ORM', 'AWS'],
-      githubUrl: '#',
-      liveUrl: '#',
+      githubUrl: 'https://github.com/Prashantdhaka23/inventory-dashboard',
+      liveUrl: 'https://github.com/Prashantdhaka23/inventory-dashboard',
       gradient: 'from-blue-500 to-cyan-500'
     },
     {
       title: 'Collaborative Code Editor',
       description: 'Developed a platform for real-time collaborative coding, enabling multiple users to simultaneously edit code with instant synchronization, persistent storage in MongoDB, and pair programming support.',
       technologies: ['Spring Boot', 'WebSocket', 'React.js', 'CodeMirror', 'MongoDB'],
-      githubUrl: '#',
-      liveUrl: '#',
+      githubUrl: 'https://github.com/Prashantdhaka23/collaborative-code-editor',
+      liveUrl: 'https://github.com/Prashantdhaka23/collaborative-code-editor',
       gradient: 'from-purple-500 to-pink-500'
     },
     {
@@ -31,8 +31,8 @@ const Projects: React.FC = () => {
       title: 'Sorting Visualizer',
       description: 'Created a JavaScript application to visualize and compare different sorting algorithms with interactive controls and real-time performance metrics.',
       technologies: ['JavaScript', 'HTML5 Canvas', 'CSS3', 'Data Structures'],
-      githubUrl: '#',
-      liveUrl: '#',
+      githubUrl: 'https://github.com/Prashantdhaka23/sorting-visulaizer',
+      liveUrl: 'https://sorting-visulaizer.vercel.app/',
       gradient: 'from-orange-500 to-red-500'
     },
     {

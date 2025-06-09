@@ -10,7 +10,8 @@ const Certificates: React.FC = () => {
       date: '2023',
       type: 'Competition',
       color: 'from-blue-500 to-cyan-500',
-      icon: <Award className="w-6 h-6" />
+      icon: <Award className="w-6 h-6" />,
+      link: 'https://www.facebook.com/codingcompetitions/hacker-cup/2023/certificate/189806384146671'
     },
     {
       title: 'TCS CodeVita Season 12',
@@ -19,7 +20,8 @@ const Certificates: React.FC = () => {
       date: '2023',
       type: 'Competition',
       color: 'from-purple-500 to-pink-500',
-      icon: <Award className="w-6 h-6" />
+      icon: <Award className="w-6 h-6" />,
+      link: 'https://drive.google.com/file/d/1c0DjXONyhQ71m1mDNqlWJk2u9ecnrrsb/view?usp=sharing'
     },
     {
       title: 'Getting Started with Competitive Programming',
@@ -28,26 +30,39 @@ const Certificates: React.FC = () => {
       date: '2023',
       type: 'Course',
       color: 'from-green-500 to-emerald-500',
-      icon: <Building className="w-6 h-6" />
+      icon: <Building className="w-6 h-6" />,
+      link: 'https://drive.google.com/file/d/1eQGtxM8Q3kG8t7eVsaW2pCzEDj_06gT3/view?usp=sharing'
     },
     {
       title: 'The Joy of Computing using Python',
       issuer: 'NPTEL',
       description: 'Python programming certification covering fundamentals to advanced concepts and practical applications',
-      date: '2023',
+      date: '2024',
       type: 'Course',
       color: 'from-yellow-500 to-orange-500',
-      icon: <Building className="w-6 h-6" />
+      icon: <Building className="w-6 h-6" />,
+      link: 'https://drive.google.com/file/d/17K2jY2fMlW2fw5Pb4p7lhmOD7Sfwv4l1/view?usp=sharing'
     },
     {
       title: 'Programming in Java',
       issuer: 'NPTEL',
       description: 'Java programming certification covering object-oriented programming, data structures, and software development',
-      date: '2023',
+      date: '2025',
       type: 'Course',
       color: 'from-red-500 to-pink-500',
-      icon: <Building className="w-6 h-6" />
-    }
+      icon: <Building className="w-6 h-6" />,
+      link: 'https://drive.google.com/file/d/1U1KM0QAwYmXp1QxeFL1rA245KxpmmhnI/view?usp=sharing'
+    },
+    {
+      title: 'CodeKaze - INVICTUS’24',
+      issuer: 'INVICTUS, DTU',
+      description: 'Certificate for securing 1st position in CodeKaze held during INVICTUS’24, the annual Techfest of Delhi Technological University.',
+      date: '2024',
+      type: 'Competition',
+      color: 'from-indigo-500 to-blue-600',
+      icon: <Award className="w-6 h-6" />,
+      link: 'https://drive.google.com/file/d/1XwcKk8Sa6qLi3_2OKvCC-EhXN4291dX4/view?usp=sharing'
+    },
   ];
 
   return (
@@ -104,13 +119,20 @@ const Certificates: React.FC = () => {
                 </p>
               </div>
 
-              {/* Certificate Footer */}
-              <div className="mt-6 pt-4 border-t border-slate-700">
-                <button className={`w-full flex items-center justify-center px-4 py-2 bg-gradient-to-r ${cert.color} text-white rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium`}>
-                  <ExternalLink size={14} className="mr-2" />
-                  View Certificate
-                </button>
-              </div>
+              {/* Certificate Footer with Link */}
+              {cert.link && (
+                <div className="mt-6 pt-4 border-t border-slate-700">
+                  <a
+                    href={cert.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-full flex items-center justify-center px-4 py-2 bg-gradient-to-r ${cert.color} text-white rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium`}
+                  >
+                    <ExternalLink size={14} className="mr-2" />
+                    View Certificate
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>
