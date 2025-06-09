@@ -29,17 +29,25 @@ const Contact: React.FC = () => {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          _replyto: formData.email,
+        }),
       });
 
       if (response.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
+
+        // Reset status after 5 seconds
+        setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
       }
     } catch {
       setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
     }
   };
 
@@ -83,9 +91,7 @@ const Contact: React.FC = () => {
     <section id="contact" className="py-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Get In Touch
-          </h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">Get In Touch</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto"></div>
           <p className="text-gray-300 text-lg mt-6 max-w-2xl mx-auto">
             I'm always open to discussing new opportunities, interesting projects, or just having a conversation about technology and development.
@@ -146,9 +152,7 @@ const Contact: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Name
-                  </label>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Name</label>
                   <input
                     type="text"
                     id="name"
@@ -156,14 +160,12 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400"
                     placeholder="Your Name"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Email
-                  </label>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email</label>
                   <input
                     type="email"
                     id="email"
@@ -171,16 +173,14 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400"
                     placeholder="you@example.com"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                  Subject
-                </label>
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">Subject</label>
                 <input
                   type="text"
                   id="subject"
@@ -188,15 +188,13 @@ const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400"
                   placeholder="Subject"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Message
-                </label>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Message</label>
                 <textarea
                   id="message"
                   name="message"
@@ -204,7 +202,7 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 resize-none"
                   placeholder="Your message"
                 />
               </div>
