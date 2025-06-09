@@ -4,7 +4,7 @@ Welcome to the source code of my personal developer portfolio website, built usi
 
 🌐 **Live Demo:** [https://prashantdhaka23.github.io/Portfolio/](https://prashantdhaka23.github.io/Portfolio/)
 
-![Portfolio Screenshot](./assets/portfolio-screenshot.png)
+![Portfolio Screenshot](.portfolio-screenshot.png)
 
 ---
 
@@ -45,7 +45,7 @@ src/
 
 - **Frontend:** React, TypeScript
 - **Styling:** Tailwind CSS
-- **Tooling:** Vite, ESLint, PostCSS
+- **Tooling:** Vite, ESLint.
 - **Deployment:** GitHub Pages
 
 ---
