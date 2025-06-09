@@ -9,6 +9,8 @@ const Contact: React.FC = () => {
     message: ''
   });
 
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -16,10 +18,29 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    setStatus('submitting');
+
+    try {
+      const response = await fetch('https://formspree.io/f/mqabpbjn', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
 
   const contactInfo = [
@@ -72,7 +93,7 @@ const Contact: React.FC = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
+          {/* Contact Info */}
           <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">Let's Connect</h3>
@@ -82,7 +103,6 @@ const Contact: React.FC = () => {
               </p>
             </div>
 
-            {/* Contact Details */}
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
                 <a
@@ -91,9 +111,7 @@ const Contact: React.FC = () => {
                   className="flex items-center p-4 bg-slate-800/30 backdrop-blur-lg border border-slate-700 rounded-xl hover:bg-slate-800/50 transition-all duration-300 group"
                 >
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
-                    <div className="text-white">
-                      {info.icon}
-                    </div>
+                    <div className="text-white">{info.icon}</div>
                   </div>
                   <div>
                     <h4 className="text-white font-semibold">{info.title}</h4>
@@ -103,7 +121,6 @@ const Contact: React.FC = () => {
               ))}
             </div>
 
-            {/* Social Links */}
             <div>
               <h4 className="text-white font-semibold mb-4">Follow Me</h4>
               <div className="flex space-x-4">
@@ -122,10 +139,10 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Form */}
           <div className="bg-slate-800/30 backdrop-blur-lg border border-slate-700 rounded-xl p-8">
             <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
@@ -139,11 +156,10 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
                     placeholder="Your Name"
                   />
                 </div>
-                
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                     Email
@@ -155,8 +171,8 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+                    placeholder="you@example.com"
                   />
                 </div>
               </div>
@@ -172,8 +188,8 @@ const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                  placeholder="What's this about?"
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+                  placeholder="Subject"
                 />
               </div>
 
@@ -188,18 +204,26 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
-                  placeholder="Tell me about your project or just say hello!"
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 resize-none"
+                  placeholder="Your message"
                 />
               </div>
 
               <button
                 type="submit"
+                disabled={status === 'submitting'}
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 px-6 rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
               >
                 <Send className="w-5 h-5 mr-2" />
-                Send Message
+                {status === 'submitting' ? 'Sending...' : 'Send Message'}
               </button>
+
+              {status === 'success' && (
+                <p className="text-green-400 text-sm mt-2">Your message has been sent successfully!</p>
+              )}
+              {status === 'error' && (
+                <p className="text-red-400 text-sm mt-2">Something went wrong. Please try again later.</p>
+              )}
             </form>
           </div>
         </div>
